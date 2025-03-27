@@ -20,7 +20,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
                         . venv/bin/activate
-                        venv/bin/python -m pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short || true
+                        venv/bin/python -m pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short || exit 0
                     '''
                 }
     }
