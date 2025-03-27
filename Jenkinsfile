@@ -8,7 +8,6 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'pip install python3-venv'
                 sh 'python3 -m venv venv'
                 sh 'source venv/bin/activate && pip install --upgrade pip'
                 sh 'source venv/bin/activate && pip install -r requirements.txt'
