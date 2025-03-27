@@ -17,7 +17,9 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'source venv/bin/activate && pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short'
+                sh '. venv/bin/activate' 
+                sh 'pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short'
+                sh 'deactivate'
             }
         }
         stage('Publish Report') {
