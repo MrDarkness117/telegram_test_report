@@ -17,10 +17,12 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh '''
-                    . venv/bin/activate
-                    venv/bin/python -m pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short || true
-                '''
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh '''
+                        . venv/bin/activate
+                        venv/bin/python -m pytest --html=reports/report.html --alluredir=allure-results --self-contained-html --maxfail=1 --disable-warnings --tb=short || true
+                    '''
+                }
     }
         }
         stage('Publish Report') {
