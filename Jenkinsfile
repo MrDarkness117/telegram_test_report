@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/MrDarkness117/telegram_test_report.git'
+                git branch: 'main', url: 'https://github.com/MrDarkness117/telegram_test_report.git'
             }
         }
         stage('Install Dependencies') {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Publish Report') {
             steps {
-                piblishHTML (target: [
+                publishHTML (target: [
                     reportDir: 'reports',
                     reportFiles: 'report.html',
                     reportName: 'PyTest HTML Report',
